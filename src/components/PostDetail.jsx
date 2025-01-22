@@ -29,7 +29,7 @@ const PostDetail = () => {
     fetchPost();
   }, []);
   
-  };
+
 
   if (loading) return <div>Cargando post...</div>;
   if (error) return <div>Error: {error}</div>;
