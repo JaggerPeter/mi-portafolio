@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 
 const PostDetail = () => {
-  const { id } = useParams();
+  useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
