@@ -3,30 +3,32 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 
 const PostDetail = () => {
-  const { id } = useParams(); // Obtiene el ID del post desde la URL
+  const { id } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchPost();
-  }, [id]);
-
-  const fetchPost = async () => {
-    try {
-      const response = await fetch(`http://localhost:5000/api/posts/${id}`);
-      if (!response.ok) {
-        throw new Error('Error al cargar el post');
+    const fetchPost = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/posts/1');
+        if (!response.ok) {
+          throw new Error('Error al cargar el post');
+        }
+        const data = await response.json();
+        setPost(data);
+        setLoading(false);
+        toast.success('Post cargado correctamente');
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+        toast.error('Error al cargar el post');
       }
-      const data = await response.json();
-      setPost(data);
-      setLoading(false);
-      toast.success('Post cargado correctamente');
-    } catch (err) {
-      setError(err.message);
-      setLoading(false);
-      toast.error('Error al cargar el post');
-    }
+    };
+  
+    fetchPost();
+  }, []);
+  
   };
 
   if (loading) return <div>Cargando post...</div>;
