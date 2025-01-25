@@ -4,12 +4,10 @@ const pool = require('./db.jsx');
 
 const app = express();
 
-// Middleware base de datos
 app.use(cors());
 app.use(express.json());
 
-// Rutas para posts del blog
-// GET - Obtener todos posts
+
 app.get('/api/posts', async (req, res) => {
   try {
     const allPosts = await pool.query(
@@ -22,7 +20,6 @@ app.get('/api/posts', async (req, res) => {
   }
 });
 
-// POST - Crear nuevo post
 app.post('/api/posts', async (req, res) => {
   try {
     const { title, content, category } = req.body;
@@ -37,7 +34,6 @@ app.post('/api/posts', async (req, res) => {
   }
 });
 
-// GET - Obtener post específico
 app.get('/api/posts/:id', async (req, res) => {
   try {
     const { id } = req.params;

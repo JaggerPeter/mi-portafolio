@@ -11,7 +11,7 @@ const PostDetail = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/posts/1');
+        const response = await fetch(`https://server-9bpw.onrender.com/api/posts/1`);
         if (!response.ok) {
           throw new Error('Error al cargar el post');
         }
@@ -29,8 +29,6 @@ const PostDetail = () => {
     fetchPost();
   }, []);
   
-
-
   if (loading) return <div>Cargando post...</div>;
   if (error) return <div>Error: {error}</div>;
 

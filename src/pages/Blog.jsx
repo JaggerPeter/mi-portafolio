@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'sonner';
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);
@@ -12,16 +13,18 @@ const Blog = () => {
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/posts');
+      const response = await fetch('https://server-9bpw.onrender.com/api/posts');
       if (!response.ok) {
         throw new Error('Error al cargar los posts');
       }
       const data = await response.json();
       setPosts(data);
       setLoading(false);
+      toast.success('Posts cargados correctamente');
     } catch (err) {
       setError(err.message);
       setLoading(false);
+      toast.error('Error al cargar los posts');
     }
   };
 
